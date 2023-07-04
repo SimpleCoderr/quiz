@@ -7,6 +7,6 @@ type AnswerOptionProps = {
 
 export const AnswerOption = ({index, children}: AnswerOptionProps) => {
   return (
-    <MyCheckbox value={index}>{children}</MyCheckbox>
+    <MyCheckbox style={{fontSize: '16px'}} value={index}>{children}</MyCheckbox>
   )
 }
