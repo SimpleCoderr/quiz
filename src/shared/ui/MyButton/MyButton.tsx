@@ -2,9 +2,10 @@ import { Button } from 'antd';
 
 type MyButtonProps = {
     children: string;
-    disabled: boolean;
     onClick: () => void;
-    type: 'primary' | 'link'
+    type: 'primary' | 'link';
+    disabled?: boolean;
+    style?: React.CSSProperties;
 }
 
 export const MyButton = ({children, ...rest}: MyButtonProps) => {
