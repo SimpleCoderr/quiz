@@ -16,7 +16,7 @@ export const QuestionBlock = ({
   index,
   changeVariant,
 }: QuestionBlockProps) => {
-  const [value, setValue] = useState<number | null>(null);
+  const [value, setValue] = useState<number | null>(null); // здесь надо не использовать useState, уже лучше useContext или же логика в redux
 
   useEffect(() => {
     changeVariant(value);
