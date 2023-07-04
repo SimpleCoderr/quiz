@@ -1,9 +1,9 @@
-import s from  "./styles.module.scss"
+import s from './styles.module.scss'
 
 const MainPage = () => {
+
   return (
     <div className={s.mainPage}>
-      Hello world!
     </div>
   )
 }
