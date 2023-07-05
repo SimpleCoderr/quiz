@@ -1,12 +1,15 @@
-import './index.scss'
-import MainPage from 'pages';
+import "./index.scss";
+import MainPage from "pages";
+import { StoreProvider } from "./providers";
 
 function App() {
-    return (
-        <div className='app'>
-            <MainPage/>
-        </div>
-    );
+  return (
+    <div className="app">
+      <StoreProvider>
+        <MainPage />
+      </StoreProvider>
+    </div>
+  );
 }
 
 export default App;
