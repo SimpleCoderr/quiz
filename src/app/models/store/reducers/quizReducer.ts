@@ -4,12 +4,14 @@ type QuizState = {
   questions: questionBlock[];
   page: number;
   pageQuantity: number;
+  answers: (string | undefined)[];
+  resultsIsShow: boolean;
 };
 
 type QuizAction = {
-    type: string;
-    payload?: any;  // далее это нужно изменить
-}
+  type: string;
+  payload?: any; // далее это нужно изменить
+};
 
 const initialState: QuizState = {
   questions: [
@@ -46,11 +48,18 @@ const initialState: QuizState = {
   ],
   page: 1,
   pageQuantity: 5,
+  resultsIsShow: false,
+  answers: [],
 };
 
-export const quizReducer = (state = initialState, action: QuizAction): QuizState => {
+export const quizReducer = (
+  state = initialState,
+  action: QuizAction
+): QuizState => {
   switch (action.type) {
     default:
-      return state;
+      return { ...state, answers: new Array(state.questions.length) }; 
+      // чтобы в дальнейшем отслеживать ответы на вопросы, нужно иметь массив, размер которого равен количеству вопросов
+      // default выполнится лишь однажды - при первом проходе по редьюсеру, в момент инициализации state
   }
 };
