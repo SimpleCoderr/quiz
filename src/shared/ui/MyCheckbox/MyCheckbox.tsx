@@ -3,7 +3,7 @@ import { Checkbox,  } from "antd"
 type MyCheckboxProps = {
     children: string;
     value: number;
-    style: React.CSSProperties;
+    style?: React.CSSProperties;
 }
 
 export const MyCheckbox = ({children, value, style}: MyCheckboxProps) => {

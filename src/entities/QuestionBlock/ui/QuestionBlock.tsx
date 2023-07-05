@@ -1,49 +1,45 @@
-import { Checkbox } from "antd";
 import { CheckboxValueType } from "antd/es/checkbox/Group";
-import { useEffect, useState } from "react";
-import { AnswerOption } from "entities";
+import { MyCheckbox, useAppDispatch } from "shared";
+import { changeVariantAC } from "../model";
 import s from "./QuestionBlock.module.scss";
+import { Checkbox } from "antd";
 
 type QuestionBlockProps = {
   index: number;
   question: string;
   variants: string[];
-  changeVariant: (value: number) => void;
+  markedVariant: number | undefined;
 };
 export const QuestionBlock = ({
   question,
   variants,
   index,
-  changeVariant,
+  markedVariant,
 }: QuestionBlockProps) => {
-  const [value, setValue] = useState<number | null>(null); // здесь надо не использовать useState, уже лучше useContext или же логика в redux
-
-  useEffect(() => {
-    changeVariant(value);
-  }, [value]);
-
   const numberQuestion = index + 1;
+
+  const dispatch = useAppDispatch();
 
   const handleChange = (checkedValue: CheckboxValueType[]) => {
     // checkedValue - массив выбранных значений
     const clickedValue = checkedValue[checkedValue.length - 1];
-    // берем последний элемент массива, т.к. нам нужно поставить галочку только на нем
-    setValue(clickedValue as number);
+    // берем последний элемент массива, т.к. нам нужно отметить только его(только один вариант ответа должен быть отмеченным)
+    dispatch(changeVariantAC(index, clickedValue as number));
   };
   return (
-    <div>
+    <div className={s.questionBlock}>
       <h5 className={s.question}>
         {numberQuestion}) {question}
       </h5>
       <Checkbox.Group
         className={s.checkboxGroup}
         onChange={handleChange}
-        value={[value]}
+        value={[markedVariant]}
       >
         {variants.map((variant, index) => (
-          <AnswerOption index={index} key={variant}>
+          <MyCheckbox value={index} key={variant} style={{fontSize: '16px'}}>
             {variant}
-          </AnswerOption>
+          </MyCheckbox>
         ))}
       </Checkbox.Group>
     </div>

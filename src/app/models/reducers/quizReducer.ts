@@ -1,17 +1,31 @@
+import { CHANGE_VARIANT } from "entities/QuestionBlock";
+import { PAGE_BACK, PAGE_FORWARD } from "features/PaginationBlock";
 import { questionBlock } from "shared";
 
 type QuizState = {
   questions: questionBlock[];
   page: number;
   pageQuantity: number;
-  answers: (string | undefined)[];
+  answers: (number | undefined)[];
   resultsIsShow: boolean;
 };
 
-type QuizAction = {
-  type: string;
-  payload?: any; // далее это нужно изменить
+type ChangeVariantAction = {
+  type: typeof CHANGE_VARIANT;
+  payload: {
+    questionIndex: number;
+    variantIndex: number;
+  };
 };
+type increasePageAction = {
+  type: typeof PAGE_FORWARD;
+};
+
+type decreasePageAction = {
+  type: typeof PAGE_BACK;
+};
+
+type QuizAction = ChangeVariantAction | increasePageAction | decreasePageAction;
 
 const initialState: QuizState = {
   questions: [
@@ -57,9 +71,22 @@ export const quizReducer = (
   action: QuizAction
 ): QuizState => {
   switch (action.type) {
+    case CHANGE_VARIANT:
+      return {
+        ...state,
+        answers: [
+          ...state.answers.slice(0, action.payload.questionIndex),
+          action.payload.variantIndex,
+          ...state.answers.slice(action.payload.questionIndex + 1),
+        ],
+      };
+    case PAGE_FORWARD:
+      return { ...state, page: state.page + 1 };
+    case PAGE_BACK:
+      return { ...state, page: state.page - 1 };
     default:
-      return { ...state, answers: new Array(state.questions.length) }; 
-      // чтобы в дальнейшем отслеживать ответы на вопросы, нужно иметь массив, размер которого равен количеству вопросов
-      // default выполнится лишь однажды - при первом проходе по редьюсеру, в момент инициализации state
+      return { ...state, answers: new Array(state.questions.length) };
+    // чтобы в дальнейшем отслеживать ответы на вопросы, нужно иметь массив, размер которого равен количеству вопросов
+    // default выполнится лишь однажды - при первом проходе по редьюсеру, в момент инициализации state
   }
 };
