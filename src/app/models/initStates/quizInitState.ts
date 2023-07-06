@@ -1,4 +1,7 @@
 import { questionBlock } from "shared";
+import { capitalsOfEurope } from "shared/const/capitalsOfEuropeArray";
+import { country } from "shared/const/countryAndCaptalObject";
+import { getRandomQuestionBlock } from "shared/lib/getRandomQuestionBlock";
 
 type QuizState = {
     questions: questionBlock[];
@@ -7,40 +10,15 @@ type QuizState = {
     answers: (number | undefined)[];
     resultsIsShow: boolean;
   };
+
+  const questions: questionBlock[] = []
+
+  for (let i = 0; i < 10; i++) {
+    questions.push(getRandomQuestionBlock(country, capitalsOfEurope))
+  }
   
 export const quizInitialState: QuizState = {
-    questions: [
-      {
-        question: "Столица Бразилии:",
-        variants: ["Бразилиа", "Антананариву", "Копенгаген", "Москва"],
-        correct: 0,
-      },
-      {
-        question: "Столица Испании:",
-        variants: ["Вильнюс", "Гаага", "Мадрид", "Берлин"],
-        correct: 2,
-      },
-      {
-        question: "Столица Шведции:",
-        variants: ["Копенгаген", "Пекин", "Джакарта", "Стокгольм"],
-        correct: 3,
-      },
-      {
-        question: "Столица Индии:",
-        variants: ["Дели", "Москва", "Лондон", "Анкара"],
-        correct: 0,
-      },
-      {
-        question: "Столица Алжира:",
-        variants: ["Буэнос-Айрес", "Алжир", "Бразилиа", "Кувейт"],
-        correct: 1,
-      },
-      {
-        question: "Столица Турции:",
-        variants: ["Баку", "Анкара", "Гавана", "Аккра"],
-        correct: 1,
-      },
-    ],
+    questions,
     page: 1,
     pageQuantity: 5,
     resultsIsShow: false,
