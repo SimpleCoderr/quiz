@@ -1,5 +1,5 @@
-import { store } from "app/models";
 import { Provider } from "react-redux";
+import { store } from "app/models";
 
 type ProviderProps = {
   children: React.ReactNode;

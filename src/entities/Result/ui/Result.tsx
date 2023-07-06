@@ -1,4 +1,5 @@
 import { useMemo } from "react";
+import { UndoOutlined } from "@ant-design/icons";
 import { getResultComment } from "../lib/getResultComment";
 import { MyButton } from "shared";
 import s from "./Result.module.scss";
@@ -13,7 +14,6 @@ export const Result = ({
   totalCountAnswer,
   restartQuiz,
 }: ResultProps) => {
-  
   const resultComment = useMemo(
     () => getResultComment(countRightAnswer, totalCountAnswer),
     [countRightAnswer, totalCountAnswer]
@@ -28,7 +28,12 @@ export const Result = ({
         </span>
       </div>
       <div className={s.resultComment}>{resultComment}</div>
-      <MyButton style={{fontSize: '28px'}} type="link" onClick={restartQuiz}>
+      <MyButton
+        style={{ fontSize: "28px" }}
+        type="link"
+        onClick={restartQuiz}
+        icon={<UndoOutlined />}
+      >
         Пройти тест еще раз
       </MyButton>
     </div>

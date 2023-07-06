@@ -1,8 +1,8 @@
+import { Checkbox } from "antd";
 import { CheckboxValueType } from "antd/es/checkbox/Group";
 import { MyCheckbox, useAppDispatch } from "shared";
 import { changeVariantAC } from "../model";
 import s from "./QuestionBlock.module.scss";
-import { Checkbox } from "antd";
 
 type QuestionBlockProps = {
   index: number;
@@ -16,7 +16,7 @@ export const QuestionBlock = ({
   variants,
   index,
   markedVariant,
-  disabledCheckbox
+  disabledCheckbox,
 }: QuestionBlockProps) => {
   const numberQuestion = index + 1;
 
@@ -39,7 +39,12 @@ export const QuestionBlock = ({
         value={[markedVariant]}
       >
         {variants.map((variant, index) => (
-          <MyCheckbox disabled={disabledCheckbox} value={index} key={variant} style={{fontSize: '16px'}}>
+          <MyCheckbox
+            disabled={disabledCheckbox}
+            value={index}
+            key={variant}
+            style={{ fontSize: "16px" }}
+          >
             {variant}
           </MyCheckbox>
         ))}

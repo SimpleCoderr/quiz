@@ -1,4 +1,5 @@
 import { MyButton } from "shared";
+import { CheckOutlined } from "@ant-design/icons";
 
 type ResultButtonProps = {
   onClick: () => void;
@@ -6,7 +7,12 @@ type ResultButtonProps = {
 
 export const ResultButton = ({ onClick }: ResultButtonProps) => {
   return (
-    <MyButton style={{ fontSize: "28px" }} onClick={onClick} type="link">
+    <MyButton
+      style={{ fontSize: "28px" }}
+      onClick={onClick}
+      type="link"
+      icon={<CheckOutlined />}
+    >
       Показать результаты
     </MyButton>
   );

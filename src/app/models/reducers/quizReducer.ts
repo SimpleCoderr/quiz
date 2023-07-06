@@ -1,87 +1,13 @@
 import { CHANGE_VARIANT } from "entities/QuestionBlock";
 import { PAGE_BACK, PAGE_FORWARD } from "features/PaginationBlock";
 import { QUIZ_RESTART, RESULT_SHOW } from "features/ResultBlock";
-import { questionBlock } from "shared";
-
-type QuizState = {
-  questions: questionBlock[];
-  page: number;
-  pageQuantity: number;
-  answers: (number | undefined)[];
-  resultsIsShow: boolean;
-};
-
-type ChangeVariantAction = {
-  type: typeof CHANGE_VARIANT;
-  payload: {
-    questionIndex: number;
-    variantIndex: number;
-  };
-};
-type increasePageAction = {
-  type: typeof PAGE_FORWARD;
-};
-
-type decreasePageAction = {
-  type: typeof PAGE_BACK;
-};
-type showResultAction = {
-  type: typeof RESULT_SHOW;
-};
-type resetQuizAction = {
-  type: typeof QUIZ_RESTART;
-};
-
-type QuizAction =
-  | ChangeVariantAction
-  | increasePageAction
-  | decreasePageAction
-  | showResultAction
-  | resetQuizAction;
-
-const initialState: QuizState = {
-  questions: [
-    {
-      question: "Столица Бразилии:",
-      variants: ["Бразилиа", "Антананариву", "Копенгаген", "Москва"],
-      correct: 0,
-    },
-    {
-      question: "Столица Испании:",
-      variants: ["Вильнюс", "Гаага", "Мадрид", "Берлин"],
-      correct: 2,
-    },
-    {
-      question: "Столица Шведции:",
-      variants: ["Копенгаген", "Пекин", "Джакарта", "Стокгольм"],
-      correct: 3,
-    },
-    {
-      question: "Столица Индии:",
-      variants: ["Дели", "Москва", "Лондон", "Анкара"],
-      correct: 0,
-    },
-    {
-      question: "Столица Алжира:",
-      variants: ["Буэнос-Айрес", "Алжир", "Бразилиа", "Кувейт"],
-      correct: 1,
-    },
-    {
-      question: "Столица Турции:",
-      variants: ["Баку", "Анкара", "Гавана", "Аккра"],
-      correct: 1,
-    },
-  ],
-  page: 1,
-  pageQuantity: 5,
-  resultsIsShow: false,
-  answers: [],
-};
+import { QuizAction } from "../actionTypes/QuizActionTypes";
+import { quizInitialState } from "../initStates/quizInitState";
 
 export const quizReducer = (
-  state = initialState,
+  state = quizInitialState,
   action: QuizAction
-): QuizState => {
+): typeof quizInitialState => {
   switch (action.type) {
     case CHANGE_VARIANT:
       return {
@@ -99,7 +25,7 @@ export const quizReducer = (
     case RESULT_SHOW:
       return { ...state, resultsIsShow: true };
     case QUIZ_RESTART:
-      return initialState;
+      return {...quizInitialState, answers: new Array(state.questions.length)};
     default:
       return { ...state, answers: new Array(state.questions.length) };
     // чтобы в дальнейшем отслеживать ответы на вопросы, нужно иметь массив, размер которого равен количеству вопросов

@@ -1,6 +1,6 @@
-import "./index.scss";
 import MainPage from "pages";
 import { StoreProvider } from "./providers";
+import "./styles/index.scss";
 
 function App() {
   return (

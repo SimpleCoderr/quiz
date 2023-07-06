@@ -1,11 +1,11 @@
 import { QuestionBlock } from "entities/QuestionBlock";
 import { useTypedSelector } from "shared";
 import { getRangeIndexCurrentQuestions } from "../lib/getRangeIndexCurrentQuestions";
+import s from "./QuestionList.module.scss";
 
 export const QuestionList = () => {
-  const { questions, answers, page, pageQuantity, resultsIsShow } = useTypedSelector(
-    (state) => state.quiz
-  );
+  const { questions, answers, page, pageQuantity, resultsIsShow } =
+    useTypedSelector((state) => state.quiz);
 
   const [startIndex, lastIndex] = getRangeIndexCurrentQuestions(
     page,
@@ -16,7 +16,7 @@ export const QuestionList = () => {
   const currentQuestions = questions.slice(startIndex, lastIndex);
 
   return (
-    <div>
+    <div className={s.qustionList}>
       {currentQuestions.map(({ question, variants }, index) => {
         const globalIndexList = startIndex + index; // это индекс вопроса относительно всего списка
         return (
