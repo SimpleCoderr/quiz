@@ -9,12 +9,14 @@ type QuestionBlockProps = {
   question: string;
   variants: string[];
   markedVariant: number | undefined;
+  disabledCheckbox: boolean;
 };
 export const QuestionBlock = ({
   question,
   variants,
   index,
   markedVariant,
+  disabledCheckbox
 }: QuestionBlockProps) => {
   const numberQuestion = index + 1;
 
@@ -37,7 +39,7 @@ export const QuestionBlock = ({
         value={[markedVariant]}
       >
         {variants.map((variant, index) => (
-          <MyCheckbox value={index} key={variant} style={{fontSize: '16px'}}>
+          <MyCheckbox disabled={disabledCheckbox} value={index} key={variant} style={{fontSize: '16px'}}>
             {variant}
           </MyCheckbox>
         ))}

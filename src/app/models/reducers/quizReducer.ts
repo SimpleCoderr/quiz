@@ -1,5 +1,6 @@
 import { CHANGE_VARIANT } from "entities/QuestionBlock";
 import { PAGE_BACK, PAGE_FORWARD } from "features/PaginationBlock";
+import { QUIZ_RESTART, RESULT_SHOW } from "features/ResultBlock";
 import { questionBlock } from "shared";
 
 type QuizState = {
@@ -24,8 +25,19 @@ type increasePageAction = {
 type decreasePageAction = {
   type: typeof PAGE_BACK;
 };
+type showResultAction = {
+  type: typeof RESULT_SHOW;
+};
+type resetQuizAction = {
+  type: typeof QUIZ_RESTART;
+};
 
-type QuizAction = ChangeVariantAction | increasePageAction | decreasePageAction;
+type QuizAction =
+  | ChangeVariantAction
+  | increasePageAction
+  | decreasePageAction
+  | showResultAction
+  | resetQuizAction;
 
 const initialState: QuizState = {
   questions: [
@@ -84,6 +96,10 @@ export const quizReducer = (
       return { ...state, page: state.page + 1 };
     case PAGE_BACK:
       return { ...state, page: state.page - 1 };
+    case RESULT_SHOW:
+      return { ...state, resultsIsShow: true };
+    case QUIZ_RESTART:
+      return initialState;
     default:
       return { ...state, answers: new Array(state.questions.length) };
     // чтобы в дальнейшем отслеживать ответы на вопросы, нужно иметь массив, размер которого равен количеству вопросов

@@ -6,7 +6,7 @@ type ResultButtonProps = {
 
 export const ResultButton = ({ onClick }: ResultButtonProps) => {
   return (
-    <MyButton style={{ fontSize: "20px" }} onClick={onClick} type="link">
+    <MyButton style={{ fontSize: "28px" }} onClick={onClick} type="link">
       Показать результаты
     </MyButton>
   );

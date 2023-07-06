@@ -1,13 +1,12 @@
-import { Checkbox,  } from "antd"
+import { Checkbox } from "antd";
 
 type MyCheckboxProps = {
-    children: string;
-    value: number;
-    style?: React.CSSProperties;
-}
+  children: string;
+  value: number;
+  style?: React.CSSProperties;
+  disabled: boolean;
+};
 
-export const MyCheckbox = ({children, value, style}: MyCheckboxProps) => {
-  return (
-    <Checkbox style={style} value={value}>{children}</Checkbox>
-  )
-}
+export const MyCheckbox = ({ children, ...rest }: MyCheckboxProps) => {
+  return <Checkbox {...rest}>{children}</Checkbox>;
+};
