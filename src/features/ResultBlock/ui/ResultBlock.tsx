@@ -1,8 +1,10 @@
+import {Space} from 'antd';
 import { ResultButton } from "entities";
 import { Result } from "entities/Result";
 import { useAppDispatch, useTypedSelector } from "shared";
 import { restartQuizAC, showResultAC } from "../model";
 import { getCountRightAnswer } from "../lib/getCountRightAnswer";
+import CountdownTimer from "entities/CountdownTimer/ui/CountdownTimer";
 import s from "./ResultBlock.module.scss";
 
 export const ResultBlock = () => {
@@ -29,7 +31,10 @@ export const ResultBlock = () => {
           restartQuiz={restartQuiz}
         />
       ) : (
-        <ResultButton onClick={showResult} />
+        <Space align='center'>
+          <ResultButton onClick={showResult} />
+          <CountdownTimer numberMinutes={10} onFinish={showResult}/>
+        </Space>
       )}
     </div>
   );
