@@ -1,4 +1,4 @@
-import MainPage from "pages";
+import Testing from "pages/Testing";
 import { StoreProvider } from "./providers";
 import "./styles/index.scss";
 
@@ -6,7 +6,7 @@ function App() {
   return (
     <div className="app">
       <StoreProvider>
-        <MainPage />
+        <Testing />
       </StoreProvider>
     </div>
   );

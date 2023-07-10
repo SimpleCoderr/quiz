@@ -1,11 +1,18 @@
+import {
+  COMMENT_FOR_MARK_2,
+  COMMENT_FOR_MARK_3,
+  COMMENT_FOR_MARK_4,
+  COMMENT_FOR_MARK_5,
+} from "../const";
+
 export const getResultComment = (rightCount: number, totalCount: number) => {
   const ratio = (rightCount / totalCount) * 100;
   if (ratio < 50) {
-    return "К сожалению, ты набрал меньше 50% правильных ответов :(";
+    return COMMENT_FOR_MARK_2;
   } else if (ratio < 70) {
-    return "Ты что-то знаешь, но далеко не все, пройди тест еще раз и получи результат лучше";
+    return COMMENT_FOR_MARK_3;
   } else if (ratio < 90) {
-    return "Ты достаточно много знаешь, у тебя твердая 4!";
+    return COMMENT_FOR_MARK_4;
   }
-  return "Нужно быть очень умным, чтобы так хорошо пройти тест!";
+  return COMMENT_FOR_MARK_5;
 };

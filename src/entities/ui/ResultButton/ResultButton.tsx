@@ -1,5 +1,6 @@
 import { MyButton } from "shared";
 import { CheckOutlined } from "@ant-design/icons";
+import s from "./ResultButton.module.scss"
 
 type ResultButtonProps = {
   onClick: () => void;

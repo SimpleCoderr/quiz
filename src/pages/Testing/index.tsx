@@ -2,7 +2,7 @@ import { Quiz } from "widgets/Quiz";
 import s from "./styles.module.scss";
 import { ArrowDownOutlined } from "@ant-design/icons";
 
-const MainPage = () => {
+const Testing = () => {
   return (
     <div className={s.mainPage}>
       <header className={s.headerPage}>
@@ -14,4 +14,4 @@ const MainPage = () => {
   );
 };
 
-export default MainPage;
+export default Testing;
